@@ -23,13 +23,16 @@ if __name__ == "__main__":
                 gyldig_valg = True
         if valg == 1:
             print("Leser avtaler fra avtaler.txt")
-            leste_avtaler = avtale.les_avtaler_fra_fil("avtaler.txt")
+            #  leste_avtaler = avtale.les_avtaler_fra_fil("avtaler.txt")
+            print("Har ikke skrevet funksjon enda")
+            leste_avtaler = []
             if leste_avtaler:
                 for lest in leste_avtaler:
                     avtale_liste.append(lest)
         elif valg == 2:
             print("Skriver avtaler til avtaler.txt")
-            avtale.lagre_avtaler_til_fil(avtale_liste)
+            #  avtale.lagre_avtaler_til_fil(avtale_liste)
+            print("Har ikke skrevet funksjon enda")
         elif valg == 3:
             ny_avtale = avtale.lag_avtale()
             avtale_liste.append(ny_avtale)
@@ -37,17 +40,15 @@ if __name__ == "__main__":
             print(ny_avtale)
         elif valg == 4:
             print("Skriv inn hvilken indeks som skal slettes: ")
-            if avtale_liste:
-                for i in range(len(avtale_liste)):
-                    print(f"Indeks: {i}, avtale: {avtale_liste[i]}")
+            for i in range(len(avtale_liste)):
+                print(f"Indeks: {i}, avtale: {avtale_liste[i]}")
             valg_indeks = int(
                 input("Skriv inn indeksen til avtalen du vil slette: "))
             avtale_liste.pop(valg_indeks)
         elif valg == 5:
             print("Skriv inn hvilken avtale du vil redigere (erstatte): ")
-            if avtale_liste:
-                for i in range(len(avtale_liste)):
-                    print(f"Indeks: {i}, avtale: {avtale_liste[i]}")
+            for i in range(len(avtale_liste)):
+                print(f"Indeks: {i}, avtale: {avtale_liste[i]}")
             valg_indeks = int(
                 input(
                     "Skriv inn indeksen til avtalen du vil redigere (erstatte): "
