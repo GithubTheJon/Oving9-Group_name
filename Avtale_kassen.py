@@ -1,5 +1,4 @@
 from datetime import datetime  # as dt
-
 """ oppgave d"""
 
 
@@ -67,6 +66,7 @@ def avtaler_oversikt(oversikt=0):
 def avtale_til_tekst_fil():
     with open("readme.txt", "w") as file:
         for avtale in avtale_liste:
+            #  file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet}\n")
             index = 1
             file.write(f"Index: {index}\n   {avtale}")
             file.write("\n")
@@ -83,7 +83,8 @@ def avtale_fra_tekst_fil():
 
 if __name__ == '__main__':
     avtale_liste = []
-    test_avtale = Avtale("test", "Rom102", datetime(2022,10,25,15,30,00), 60)
+    test_avtale = Avtale("test", "Rom102", datetime(2022, 10, 25, 15, 30, 00),
+                         60)
     avtale_liste.append(test_avtale)
 
     # avtale = lag_avtale()
