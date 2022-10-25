@@ -1,4 +1,5 @@
 from datetime import datetime  # as dt
+
 """ oppgave d"""
 
 
@@ -14,6 +15,9 @@ class Avtale:
 
     def __str__(self):
         return f"Denne avtalen heter {self.tittel}, er i {self.sted}, starter {self.tid} og varer i {self.varighet} minutter"
+
+
+""" f """
 
 
 def lag_avtale():
@@ -40,11 +44,50 @@ def lag_avtale():
             print("Ugyldig varighet!")
         else:
             varighet_gyldig = True
+    avtale_liste.append(Avtale(tittel, sted, starttidspunkt, varighet))
     return Avtale(tittel, sted, starttidspunkt, varighet)
 
 
-#  av = Avtale("12", "Rom102", "2022-24-10 20:00:00", 30)
-#  print(av.varighet)
+""" g """
+
+
+def avtaler_oversikt(oversikt=0):
+    if len(avtale_liste) == 0:
+        print("Det finnes ingen avtaler enda")
+    else:
+        for avtale in avtale_liste:
+            index = 1
+            print(f"Index: {index}, Tittel: {avtale.tittel}\n   {avtale}")
+            index += 1
+
+
+""" h """
+
+
+def avtale_til_tekst_fil():
+    with open("readme.txt", "w") as file:
+        for avtale in avtale_liste:
+            index = 1
+            file.write(f"Index: {index}\n   {avtale}")
+            file.write("\n")
+            index += 1
+
+
+""" i """
+
+
+def avtale_fra_tekst_fil():
+    with open("readme.txt", "w") as file:
+        pass
+
+
 if __name__ == '__main__':
-    avtale = lag_avtale()
-    print(avtale)
+    avtale_liste = []
+    test_avtale = Avtale("test", "Rom102", datetime(2022,10,25,15,30,00), 60)
+    avtale_liste.append(test_avtale)
+
+    # avtale = lag_avtale()
+    # print(avtale)
+    avtaler_oversikt()
+
+    avtale_til_tekst_fil()
