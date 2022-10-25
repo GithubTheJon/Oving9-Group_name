@@ -66,19 +66,29 @@ def avtaler_oversikt(oversikt=0):
 def avtale_til_tekst_fil():
     with open("readme.txt", "w") as file:
         for avtale in avtale_liste:
-            #  file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet}\n")
-            index = 1
-            file.write(f"Index: {index}\n   {avtale}")
-            file.write("\n")
-            index += 1
+            file.write(
+                f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet}\n"
+            )
+            #  index = 1
+            #  file.write(f"Index: {index}\n   {avtale}")
+            #  file.write("\n")
+            #  index += 1
 
 
 """ i """
 
 
-def avtale_fra_tekst_fil():
-    with open("readme.txt", "w") as file:
-        pass
+def les_avtaler_fra_fil(fil):
+    avtaler = []
+    with open(fil, "r") as f:
+        for linje in f:
+            linje = linje.rstrip("\n")
+            linje = linje.split(";")
+            starttid = datetime.fromisoformat(linje[2])
+            avtale_fra_fil = Avtale(linje[0], linje[1], starttid,
+                                    int(linje[3]))
+            avtaler.append(avtale_fra_fil)
+    return avtaler
 
 
 if __name__ == '__main__':
@@ -92,3 +102,5 @@ if __name__ == '__main__':
     avtaler_oversikt()
 
     avtale_til_tekst_fil()
+    avtaler_fra_fil = les_avtaler_fra_fil("readme.txt")
+    print(avtaler_fra_fil[0])
