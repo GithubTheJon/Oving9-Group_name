@@ -1,3 +1,4 @@
+import random
 from datetime import datetime  # as dt
 """ oppgave d"""
 
@@ -13,7 +14,7 @@ class Avtale:
     """ e """
 
     def __str__(self):
-        return f"Denne avtalen heter {self.tittel}, er i {self.sted}, starter {self.tid} og varer i {self.varighet} minutter"
+        return f"Denne avtalen heter {self.tittel}, er i/på {self.sted}, starter {self.tid} og varer i {self.varighet} minutter"
 
 
 """ f """
@@ -50,7 +51,7 @@ def lag_avtale():
 """ g """
 
 
-def avtaler_oversikt(oversikt=0):
+def avtaler_oversikt():
     if len(avtale_liste) == 0:
         print("Det finnes ingen avtaler enda")
     else:
@@ -63,16 +64,12 @@ def avtaler_oversikt(oversikt=0):
 """ h """
 
 
-def avtale_til_tekst_fil():
-    with open("readme.txt", "w") as file:
+def avtale_til_tekst_fil(fil):
+    with open(fil, "w") as file:
         for avtale in avtale_liste:
             file.write(
                 f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet}\n"
             )
-            #  index = 1
-            #  file.write(f"Index: {index}\n   {avtale}")
-            #  file.write("\n")
-            #  index += 1
 
 
 """ i """
@@ -91,16 +88,54 @@ def les_avtaler_fra_fil(fil):
     return avtaler
 
 
+""" j """
+
+
+def avtale_dato(listen, dato=0):
+    # spørr om dato her istedet
+    start_gyldig = False
+    while not start_gyldig:
+        try:
+            ar = int(input("Skriv inn aaret avtalen skal holdes: "))
+            ma = int(input("Skriv inn maaneden avtalen skal holdes: "))
+            da = int(input("Skriv inn dagen avtalen skal holdes: "))
+            dato = datetime.date(datetime(ar, ma, da))
+        except ValueError:
+            print("Ugyldig dato!")
+        else:
+            start_gyldig = True
+
+    skjekk = 0
+    for avtale in listen:
+        if datetime.date(avtale.tid) == dato:
+            print(avtale)
+            skjekk += 1
+    if skjekk == 0:
+        print(f"Det er ingen avtaler denne dagen: {dato}")
+
+
 if __name__ == '__main__':
     avtale_liste = []
-    test_avtale = Avtale("test", "Rom102", datetime(2022, 10, 25, 15, 30, 00),
-                         60)
-    avtale_liste.append(test_avtale)
 
-    # avtale = lag_avtale()
-    # print(avtale)
-    avtaler_oversikt()
+    def avtale_generator(antall):
+        while antall > 0:
+            tittel_list = ["Pizza", "Naboklage", "Toalett", "Airtime", "Kino", "President", "Studie", "Trening"]
+            test_avtale = Avtale(tittel_list[random.randint(0, len(tittel_list)-1)],
+                                 f"Rom{random.randint(100,500)}", datetime(2022, random.randint(1, 12), random.randint(1, 28),
+                                                                           random.randint(8, 16), 15, 00), random.randint(15, 90))
+            avtale_liste.append(test_avtale)
+            antall -= 1
 
-    avtale_til_tekst_fil()
+
+    avtale_generator(10)
+    innlevering = Avtale("Innlevering", "UiS", datetime(2022, 10, 28, 23, 59), 1)
+    avtale_liste.append(innlevering)
+    avtale_til_tekst_fil("readme.txt")
+
+    # avtaler_oversikt()
+
     avtaler_fra_fil = les_avtaler_fra_fil("readme.txt")
-    print(avtaler_fra_fil[0])
+    # print(avtaler_fra_fil)
+
+    avtale_dato(avtale_liste)
+    # skriv 2022, 10, 28
