@@ -30,7 +30,7 @@ if __name__ == "__main__":
             leste_avtaler = avtale.les_avtaler_fra_fil(fil)
             if leste_avtaler:
                 for lest in leste_avtaler:
-                    avtale_liste.append(lest)
+                    # avtale_liste.append(lest)
                     print(lest)
 
         elif valg == 2:
