@@ -1,11 +1,14 @@
 import Avtale_kassen as avtale
 
 if __name__ == "__main__":
+    fil = "readme.txt"
+
     kjor = True
     avtale_liste = []
+    avtale.avtale_generator(10, avtale_liste)
+
     while kjor:
-        print()
-        print("Velg et valg fra menyen:")
+        print("\nVelg et valg fra menyen:")
         print("1: for les avtaler fra fil")
         print("2: for skriv avtaler til fil")
         print("3: Skriv inn ny avtale")
@@ -21,30 +24,33 @@ if __name__ == "__main__":
                 print("Ugyldig valg!")
             else:
                 gyldig_valg = True
+
         if valg == 1:
-            print("Leser avtaler fra avtaler.txt")
-            #  leste_avtaler = avtale.les_avtaler_fra_fil("avtaler.txt")
-            print("Har ikke skrevet funksjon enda")
-            leste_avtaler = []
+            print(f"Leser avtaler fra {fil}\n")
+            leste_avtaler = avtale.les_avtaler_fra_fil(fil)
             if leste_avtaler:
                 for lest in leste_avtaler:
                     avtale_liste.append(lest)
+                    print(lest)
+
         elif valg == 2:
-            print("Skriver avtaler til avtaler.txt")
-            #  avtale.lagre_avtaler_til_fil(avtale_liste)
-            print("Har ikke skrevet funksjon enda")
+            print(f"Skriver avtaler til {fil}")
+            print(avtale.avtale_til_tekst_fil(fil, avtale_liste))
+
         elif valg == 3:
-            ny_avtale = avtale.lag_avtale()
+            ny_avtale = avtale.lag_avtale(avtale_liste)
             avtale_liste.append(ny_avtale)
-            print("Lager avtalen:")
+            print("Laget avtalen:")
             print(ny_avtale)
+
         elif valg == 4:
             print("Skriv inn hvilken indeks som skal slettes: ")
             for i in range(len(avtale_liste)):
                 print(f"Indeks: {i}, avtale: {avtale_liste[i]}")
             valg_indeks = int(
-                input("Skriv inn indeksen til avtalen du vil slette: "))
+                input("Skriv inn indexfcn til avtalen du vil slette: "))
             avtale_liste.pop(valg_indeks)
+
         elif valg == 5:
             print("Skriv inn hvilken avtale du vil redigere (erstatte): ")
             for i in range(len(avtale_liste)):
@@ -63,6 +69,7 @@ if __name__ == "__main__":
                 for a in avtale_liste:
                     print(a)
             kjor = False
+            break
         else:
-            print("wat?")
-    print("Avsluttet!")
+            print("Hva har du gjort?")
+    print("Avsluttet! Vellykket!")
