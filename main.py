@@ -1,19 +1,30 @@
 import Avtale_kassen as avtale
+from Oving10 import Person_kassen as person
+from Oving10 import Sted_kassen as sted
 
 if __name__ == "__main__":
     fil = "readme.txt"
+    # fil_person = ""
+    # fil_sted = ""
 
     kjor = True
     avtale_liste = []
+    person_liste = []
+    sted_liste = []
+    
     avtale.avtale_generator(10, avtale_liste)
+    # person.person_generator(10, person_liste)
+    # sted.sted_generator(10, sted_liste)
 
     while kjor:
         print("\nVelg et valg fra menyen:")
-        print("1: for les avtaler fra fil")
-        print("2: for skriv avtaler til fil")
+        print("1: Les avtaler fra fil")
+        print("2: Skriv avtaler til fil")
         print("3: Skriv inn ny avtale")
         print("4: Slett avtale fra listen")
         print("5: Rediger avtale (erstatt)")
+        print("6: Legg til Person")
+        print("7: Legg til Sted")
         print("0: Skriv ut alle avtaler og avslutt")
         valg = -1
         gyldig_valg = False
@@ -63,6 +74,19 @@ if __name__ == "__main__":
             print("Lag avtalen som skal erstatte den slettede avtalen: ")
             ny_avtale = avtale.lag_avtale()
             avtale_liste[valg_indeks] = ny_avtale
+            
+         elif valg == 6:
+            ny_person = person.lag_person(person_liste)
+            person_liste.append(ny_person)
+            print("La til preson:")
+            print(ny_person)
+            
+         elif valg == 7:
+            ny_sted = sted.lag_sted(sted_liste)
+            sted_liste.append(ny_sted)
+            print("La til sted:")
+            print(ny_sted)
+            
         elif valg == 0:
             print("Avtaler:")
             if avtale_liste:
