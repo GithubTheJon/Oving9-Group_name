@@ -15,7 +15,7 @@ class Sted:
 
     #opg g
     def __str__(self):
-        return f"Sted med id {self.id}, navn {self.navn}, adresse {self.addresse}, postnummer {self.postnummer}, poststed {self.poststed}"
+        return f"Sted med id {self.id}, navn {self.navn}, addresse {self.addresse}, postnummer {self.postnummer}, poststed {self.poststed}"
 
 
 #opg h
