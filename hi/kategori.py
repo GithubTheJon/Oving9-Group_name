@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# deloppgaver; c, d, e, f
 import os
 
 
@@ -17,9 +16,15 @@ class Kategori:
 
 #opg d
 def lag_kategori():
-    id = int(input("Skriv inn id til kategorien: "))
-    navn = input("Skriv inn navnet til kategorien: ")
-    prioritet = int(input("Skriv inn prioriteten til kategorien: "))
+    while 1 < 2:
+        try: 
+            id = int(input("Skriv inn id til kategorien: "))
+            navn = input("Skriv inn navnet til kategorien: ")
+            prioritet = int(input("Skriv inn prioriteten til kategorien: "))
+        except ValueError:
+            print("Ugyldig")
+        else:
+            break
     return Kategori(id, navn, prioritet)
 
 
