@@ -1,4 +1,5 @@
 # from Oving10 import Avtale_kassen as Avtale
+# :-)
 import Avtale_kassen as Avtale
 import kategori
 import sted
@@ -147,16 +148,25 @@ if __name__ == "__main__":
                     for avtale in avtale_liste:
                         print(f"Index {i}: {avtale}")
                         i += 1
-                    indexen = int(input("Velg Index for Avtale (int): "))
+                    indexen_avtale = int(input("Velg Index for Avtale (int): "))
+
                     for kategori in kategori_liste:
                         print(kategori)
-                    print("Velg hvilken Kategori etter Index:")
-                    kate = int(input("Velg id for Kategori(int): "))
-                    katego = kategori_liste[kate]
+                    print("Velg hvilken Kategori etter id")
+                    index_kat = int(input("Velg id for Kategori (int): "))
+
+                    # Kategorien som skal legges til
+                    kat = kategori_liste[index_kat].method(kategori)
+                    # Kategorien som allerede er lagt til
+                    k = f"{avtale_liste[indexen_avtale].kategorier}"
+
+                    kk = [k, kat]
+
                     for avtale in avtale_liste:
-                        if avtale == avtale_liste[indexen]:
-                            avtale.legg_til_kategori(katego)
-                            print(f"Avtalen har nå Kategoriene: {avtale.kategorier}")
+                        if avtale == avtale_liste[indexen_avtale]:
+                            pass
+                            avtale_liste[indexen_avtale].kategorier = kk
+                    print(avtale_liste[indexen_avtale])
 
                 elif valg == 3:
                     for kategori in kategori_liste:
