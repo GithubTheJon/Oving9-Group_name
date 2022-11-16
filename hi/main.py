@@ -1,6 +1,5 @@
-# from Oving10 import Avtale_kassen as Avtale
-# :-)
-import Avtale_kassen as Avtale
+from Oving10 import Avtale_kassen as Avtale
+#import Avtale_kassen as Avtale
 import kategori
 import sted
 
@@ -57,10 +56,12 @@ if __name__ == "__main__":
                 if valg == 1:
                     print(f"Leser avtaler fra {avtale_fil}\n")
                     leste_avtaler = Avtale.les_avtaler_fra_fil(avtale_fil)
-                    """if leste_avtaler:
-                        for lest in leste_avtaler:
-                            avtale_liste.append(lest)
-                            print(lest)"""
+                    avtale_liste = []
+                    if leste_avtaler:
+                        for avtale in leste_avtaler:
+                            avtale_liste.append(avtale)
+                    print(f"Filen {avtale_fil} har blitt lest")
+                    print(avtale_liste)
 
                 elif valg == 2:
                     print(f"Skriver avtaler til {avtale_fil}")
