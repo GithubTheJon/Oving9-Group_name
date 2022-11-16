@@ -10,6 +10,10 @@ class Kategori:
         self.navn = navn
         self.prioritet = prioritet
 
+    @staticmethod
+    def method(self):
+        return f'Kategorien med id {self.id}, navn {self.navn} og prioritet {self.prioritet}'
+
     def __str__(self):
         return f'Kategorien med id {self.id}, navn {self.navn} og prioritet {self.prioritet}'
 
@@ -17,7 +21,7 @@ class Kategori:
 #opg d
 def lag_kategori():
     while 1 < 2:
-        try: 
+        try:
             id = int(input("Skriv inn id til kategorien: "))
             navn = input("Skriv inn navnet til kategorien: ")
             prioritet = int(input("Skriv inn prioriteten til kategorien: "))
