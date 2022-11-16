@@ -1,1 +1,10 @@
-test;Rom102;2022-10-25 15:30:00;60
+Studie;Sted med id 3, navn Sandsgaardsveien 79, addresse , postnummer 5338, poststed ;2022-09-05 10:15:00;60;Kategorien med id 2, navn *Viktig* og prioritet 2
+Toalett;Sted med id 6, navn Svingsgata 65, addresse , postnummer 4922, poststed ;2022-02-04 10:15:00;45;Kategorien med id 2, navn *Viktig* og prioritet 2
+Trening;Sted med id 3, navn Sandsgaardsveien 79, addresse , postnummer 5338, poststed ;2022-01-13 16:15:00;45;Kategorien med id 0, navn *Innen* og prioritet 7
+Toalett;Sted med id 5, navn Svingsgata 68, addresse , postnummer 8423, poststed ;2022-10-23 14:15:00;45;Kategorien med id 6, navn *Innen* og prioritet 1
+Airtime;Sted med id 6, navn Svingsgata 65, addresse , postnummer 4922, poststed ;2022-06-23 11:15:00;90;Kategorien med id 8, navn *Viktig* og prioritet 8
+Studie;Sted med id 6, navn Svingsgata 65, addresse , postnummer 4922, poststed ;2022-04-19 09:15:00;60;Kategorien med id 6, navn *Innen* og prioritet 1
+Pizza;Sted med id 5, navn Svingsgata 68, addresse , postnummer 8423, poststed ;2022-02-04 11:15:00;30;Kategorien med id 8, navn *Viktig* og prioritet 8
+President;Sted med id 3, navn Sandsgaardsveien 79, addresse , postnummer 5338, poststed ;2022-11-03 16:15:00;30;Kategorien med id 6, navn *Innen* og prioritet 1
+Naboklage;Sted med id 3, navn Sandsgaardsveien 79, addresse , postnummer 5338, poststed ;2022-07-27 10:15:00;60;Kategorien med id 3, navn *Innen* og prioritet 1
+Naboklage;Sted med id 7, navn Svingsgata 85, addresse , postnummer 8350, poststed ;2022-04-26 14:15:00;30;Kategorien med id 3, navn *Innen* og prioritet 1
