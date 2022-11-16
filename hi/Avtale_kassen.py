@@ -1,6 +1,6 @@
 import random
 from datetime import datetime  # as dt
-import kategori
+from kategori import Kategori as kategori
 import sted
 
 
@@ -13,15 +13,14 @@ class Avtale:
                  sted: sted.Sted,
                  tid: datetime,
                  varighet: int,
-                 kategorier = []):
+                 kategori = []):
         self.tittel = tittel
         self.sted = sted
         self.tid = tid
         self.varighet = varighet
-        self.kategorier = []
+        self.kategorier = kategori
 
-    """ e """
-
+    # ubrukt
     def legg_til_kategori(self, kat):
         self.kategorier.append(kat)
 
@@ -81,7 +80,7 @@ def avtale_til_tekst_fil(fil, avtale_liste):
     print(f"skriv til: {fil}")
     with open(fil, "wt") as file:
         for avtale in avtale_liste:
-            file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet};{avtale.kategori}\n")
+            file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet};{avtale.kategorier}\n")
         file.flush()
     file.close()
 
@@ -133,12 +132,7 @@ def avtale_dato(listen, dato=0):
 def avtale_generator(antall, avtale_liste, sted_liste, kategori_liste):
     while antall > 0:
         tittel_list = ["Pizza", "Naboklage", "Toalett", "Airtime", "Kino", "President", "Studie", "Trening"]
-        kattt = []
-        for kat in kategori_liste:
-            if random.randint(1, 3) == 3:
-                kattt.append(kat)
-        if kattt == []:
-            kattt.append(kategori_liste[0])
+
         test_avtale = Avtale(tittel_list[random.randint(0, len(tittel_list) - 1)],
                              sted_liste[random.randint(0, len(sted_liste)-1)],
             datetime(2022, random.randint(1, 12), random.randint(1, 28), random.randint(8, 16), 15, 00),
@@ -164,7 +158,7 @@ def kategori_generator(antall, kategori_liste):
     i = 0
     while antall > 0:
         grad = [f"*Viktig*", f"*Møte*", f"*Innen*"]
-        kagori = kategori.Kategori(i, grad[random.randint(0, len(grad)-1)], random.randint(1, 10))
+        kagori = kategori(i, grad[random.randint(0, len(grad)-1)], random.randint(1, 10))
         kategori_liste.append(kagori)
         antall -= 1
         i += 1
