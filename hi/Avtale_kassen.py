@@ -1,6 +1,5 @@
 import random
 from datetime import datetime  # as dt
-
 import kategori
 import sted
 
@@ -9,13 +8,12 @@ import sted
 
 
 class Avtale:
-
     def __init__(self,
                  tittel: str,
                  sted: sted.Sted,
                  tid: datetime,
                  varighet: int,
-                 kategori: list[kategori.Kategori] = []):
+                 kategori = []):
         self.tittel = tittel
         self.sted = sted
         self.tid = tid
@@ -24,20 +22,19 @@ class Avtale:
 
     """ e """
 
-    def __str__(self):
-        return f"Denne avtalen heter {self.tittel}, er i/på {self.sted}, starter {self.tid} og varer i {self.varighet} minutter"
-
-    #opg k
-    def legg_til_kategori(self, kategori: kategori.Kategori):
+    def legg_til_kategori(self, kategori):
         self.kategori = self.kategori.append(kategori)
+
+    def __str__(self):
+        return f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n{self.kategori}\n"
 
 
 """ f """
 
 
-def lag_avtale():
+def lag_avtale(avtale_liste, sted_liste):
     tittel = input("Skriv inn tittelen til avtalen: ")
-    sted = sted.Sted(input("Skriv inn hvor avtalen skal holdes: "))
+    steds = sted.lag_sted(sted_liste)
     start_gyldig = False
     while not start_gyldig:
         try:
@@ -59,14 +56,15 @@ def lag_avtale():
             print("Ugyldig varighet!")
         else:
             varighet_gyldig = True
-    avtale_liste.append(Avtale(tittel, sted, starttidspunkt, varighet))
-    return Avtale(tittel, sted, starttidspunkt, varighet)
+    avtale_liste.append(Avtale(tittel, steds, starttidspunkt, varighet))
+    # print(Avtale(tittel, steds, starttidspunkt, varighet))
+    return Avtale(tittel, steds, starttidspunkt, varighet)
 
 
 """ g """
 
 
-def avtaler_oversikt():
+def avtaler_oversikt(avtale_liste):
     if len(avtale_liste) == 0:
         print("Det finnes ingen avtaler enda")
     else:
@@ -79,28 +77,31 @@ def avtaler_oversikt():
 """ h """
 
 
-def avtale_til_tekst_fil(fil):
-    with open(fil, "w") as file:
+def avtale_til_tekst_fil(fil, avtale_liste):
+    print(f"skriv til: {fil}")
+    with open(fil, "wt") as file:
         for avtale in avtale_liste:
-            file.write(
-                f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet}\n"
-            )
+            file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet};{avtale.kategori}\n")
+        file.flush()
+    file.close()
 
 
 """ i """
 
 
 def les_avtaler_fra_fil(fil):
-    avtaler = []
-    with open(fil, "r") as f:
-        for linje in f:
+    print(f"lest fra: {fil}")
+    with open(fil, "r") as file:
+        # avtaler = []
+        for linje in file:
             linje = linje.rstrip("\n")
             linje = linje.split(";")
             starttid = datetime.fromisoformat(linje[2])
-            avtale_fra_fil = Avtale(linje[0], linje[1], starttid,
-                                    int(linje[3]))
-            avtaler.append(avtale_fra_fil)
-    return avtaler
+            avtale_fra_fil = Avtale(linje[0], linje[1], starttid, linje[3], linje[4])
+            # avtaler.append(avtale_fra_fil)
+            print(avtale_fra_fil)
+        file.flush()
+    file.close()
 
 
 """ j """
@@ -129,35 +130,64 @@ def avtale_dato(listen, dato=0):
         print(f"Det er ingen avtaler denne dagen: {dato}")
 
 
+def avtale_generator(antall, avtale_liste, sted_liste, kategori_liste):
+    while antall > 0:
+        tittel_list = ["Pizza", "Naboklage", "Toalett", "Airtime", "Kino", "President", "Studie", "Trening"]
+        kattt = []
+        for kat in kategori_liste:
+            if random.randint(1, 3) == 3:
+                kattt.append(kat)
+        if kattt == []:
+            kattt.append(kategori_liste[0])
+        test_avtale = Avtale(tittel_list[random.randint(0, len(tittel_list) - 1)],
+                             sted_liste[random.randint(0, len(sted_liste)-1)],
+            datetime(2022, random.randint(1, 12), random.randint(1, 28), random.randint(8, 16), 15, 00),
+                             random.randint(1, 6)*15, kategori_liste[random.randint(0, len(kategori_liste)-1)])
+        avtale_liste.append(test_avtale)
+        antall -= 1
+    return avtale_liste
+
+
+def sted_generator(antall, sted_liste):
+    i = 0
+    while antall > 0:
+        gate_tall = random.randint(1, 99)
+        addresse_liste = [f"Svingsgata {gate_tall}", f"Haugelandgata {gate_tall}", f"Sandsgaardsveien {gate_tall}"]
+        stedet = sted.Sted(i, addresse_liste[random.randint(0, len(addresse_liste)-1)], "", random.randint(1000, 9999), "")
+        sted_liste.append(stedet)
+        antall -= 1
+        i += 1
+    return sted_liste
+
+
+def kategori_generator(antall, kategori_liste):
+    i = 0
+    while antall > 0:
+        grad = [f"*Viktig*", f"*Møte*", f"*Innen*"]
+        kagori = kategori.Kategori(i, grad[random.randint(0, len(grad)-1)], random.randint(1, 10))
+        kategori_liste.append(kagori)
+        antall -= 1
+        i += 1
+    return kategori_liste
+
+
+"""
 if __name__ == '__main__':
     avtale_liste = []
+    sted_liste = []
+    fil = "readme.txt"
 
-    def avtale_generator(antall):
-        while antall > 0:
-            tittel_list = [
-                "Pizza", "Naboklage", "Toalett", "Airtime", "Kino",
-                "President", "Studie", "Trening"
-            ]
-            test_avtale = Avtale(
-                tittel_list[random.randint(0,
-                                           len(tittel_list) - 1)],
-                f"Rom{random.randint(100,500)}",
-                datetime(2022, random.randint(1, 12), random.randint(1, 28),
-                         random.randint(8, 16), 15,
-                         00), random.randint(15, 90))
-            avtale_liste.append(test_avtale)
-            antall -= 1
-
-    avtale_generator(10)
-    innlevering = Avtale("Innlevering", "UiS", datetime(2022, 10, 28, 23, 59),
-                         1)
-    avtale_liste.append(innlevering)
-    avtale_til_tekst_fil("readme.txt")
+    sted_generator(10, sted_liste)
+    avtale_generator(10, avtale_liste, sted_liste)
+    les_avtaler_fra_fil(fil)
+    avtale_til_tekst_fil(fil, avtale_liste)
+    les_avtaler_fra_fil(fil)
 
     # avtaler_oversikt()
 
-    avtaler_fra_fil = les_avtaler_fra_fil("readme.txt")
+    # avtaler_fra_fil = les_avtaler_fra_fil("readme.txt")
     # print(avtaler_fra_fil)
 
-    avtale_dato(avtale_liste)
+    # avtale_dato(avtale_liste)
     # skriv 2022, 10, 28
+"""
