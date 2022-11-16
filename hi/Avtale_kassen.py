@@ -81,8 +81,6 @@ def avtale_til_tekst_fil(fil, avtale_liste):
     with open(fil, "wt") as file:
         for avtale in avtale_liste:
             file.write(f"{avtale.tittel};{avtale.sted};{avtale.tid};{avtale.varighet};{avtale.kategorier}\n")
-        file.flush()
-    file.close()
 
 
 """ i """
@@ -91,16 +89,14 @@ def avtale_til_tekst_fil(fil, avtale_liste):
 def les_avtaler_fra_fil(fil):
     print(f"lest fra: {fil}")
     with open(fil, "r") as file:
-        # avtaler = []
+        avtaler = []
         for linje in file:
             linje = linje.rstrip("\n")
             linje = linje.split(";")
             starttid = datetime.fromisoformat(linje[2])
             avtale_fra_fil = Avtale(linje[0], linje[1], starttid, linje[3], linje[4])
-            # avtaler.append(avtale_fra_fil)
-            print(avtale_fra_fil)
-        file.flush()
-    file.close()
+            avtaler.append(avtale_fra_fil)
+        return avtaler
 
 
 """ j """
