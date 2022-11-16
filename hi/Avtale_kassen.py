@@ -13,20 +13,20 @@ class Avtale:
                  sted: sted.Sted,
                  tid: datetime,
                  varighet: int,
-                 kategori = []):
+                 kategorier = []):
         self.tittel = tittel
         self.sted = sted
         self.tid = tid
         self.varighet = varighet
-        self.kategori = kategori
+        self.kategorier = []
 
     """ e """
 
-    def legg_til_kategori(self, kategori):
-        self.kategori = self.kategori.append(kategori)
+    def legg_til_kategori(self, kat):
+        self.kategorier.append(kat)
 
     def __str__(self):
-        return f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n{self.kategori}\n"
+        return f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n{self.kategorier}\n"
 
 
 """ f """

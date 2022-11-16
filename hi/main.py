@@ -1,4 +1,5 @@
-from Oving10 import Avtale_kassen as Avtale
+# from Oving10 import Avtale_kassen as Avtale
+import Avtale_kassen as Avtale
 import kategori
 import sted
 
@@ -155,7 +156,7 @@ if __name__ == "__main__":
                     for avtale in avtale_liste:
                         if avtale == avtale_liste[indexen]:
                             avtale.legg_til_kategori(katego)
-                            print(f"Avtalen har nå Kategoriene: {avtale.kategori}")
+                            print(f"Avtalen har nå Kategoriene: {avtale.kategorier}")
 
                 elif valg == 3:
                     for kategori in kategori_liste:
