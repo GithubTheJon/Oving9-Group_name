@@ -13,19 +13,28 @@ class Avtale:
                  sted: sted.Sted,
                  tid: datetime,
                  varighet: int,
-                 kategori = []):
+                 kategorier = []):
         self.tittel = tittel
         self.sted = sted
         self.tid = tid
         self.varighet = varighet
-        self.kategorier = kategori
+        self.kategorier = kategorier # det var avtale generator som gjorde at dette ikke fungerte
+        # avtale generator satt bare denne til et objekt istedet for en liste med bare ett objekt
 
     # ubrukt
     def legg_til_kategori(self, kat):
         self.kategorier.append(kat)
 
     def __str__(self):
-        return f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n{self.kategorier}\n"
+        # return f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n" + "med kategoriene: " + "".join(self.kategorier.__str__())
+        skriv = f"Avtalen heter {self.tittel},\n{self.sted},\nstarter {self.tid} og varer i {self.varighet} minutter,\n" + "med kategoriene:\n"
+        if len(self.kategorier) > 1:
+            for kat in self.kategorier:
+                skriv += str(kat) + "\n"
+        elif len(self.kategorier) == 1:
+            skriv += str(self.kategorier[0])
+        return skriv
+
 
 
 """ f """
@@ -132,7 +141,7 @@ def avtale_generator(antall, avtale_liste, sted_liste, kategori_liste):
         test_avtale = Avtale(tittel_list[random.randint(0, len(tittel_list) - 1)],
                              sted_liste[random.randint(0, len(sted_liste)-1)],
             datetime(2022, random.randint(1, 12), random.randint(1, 28), random.randint(8, 16), 15, 00),
-                             random.randint(1, 6)*15, kategori_liste[random.randint(0, len(kategori_liste)-1)])
+                             random.randint(1, 6)*15, [kategori_liste[random.randint(0, len(kategori_liste)-1)]])
         avtale_liste.append(test_avtale)
         antall -= 1
     return avtale_liste
